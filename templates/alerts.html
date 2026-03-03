@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+    .alerts-container {
+        width: 95%;
+        margin: 30px auto;
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    .alerts-container h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #0B3D91;
+    }
+
+    .alerts-container table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+    .alerts-container table th,
+    .alerts-container table td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .alerts-container table th {
+        background: #007bff;
+        color: white;
+    }
+
+    .alerts-container table tr:nth-child(even) {
+        background: #f9f9f9;
+    }
+
+    .nav-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+    }
+
+    .nav-buttons a {
+        padding: 10px 20px;
+        background: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: background 0.3s;
+    }
+
+    .nav-buttons a:hover {
+        background: #0056b3;
+    }
+</style>
+
+<div class="alerts-container">
+    <!-- Page Title -->
+    <h2>Alerts - Fraudulent Transactions</h2>
+
+    <!-- Table -->
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Transaction ID</th>
+                <th>Amount</th>
+                <th>Type</th>
+                <th>Location</th>
+                <th>Device</th>
+                <th>Result</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for a in alerts %}
+            <tr>
+                <td>{{ a['id'] }}</td>
+                <td>{{ a['transaction_id'] }}</td>
+                <td>${{ a['amount'] }}</td>
+                <td>{{ a['transaction_type'] }}</td>
+                <td>{{ a['location'] }}</td>
+                <td>{{ a['device'] }}</td>
+                <td>
+                    {% if a['result'] == "Fraud Detected" %}
+                        <span style="color:red;font-weight:bold;">{{ a['result'] }}</span>
+                    {% else %}
+                        {{ a['result'] }}
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Navigation Buttons -->
+    <div class="nav-buttons">
+        <a href="/locations"> Back</a>
+        <a href="/reports">Next </a>
+    </div>
+</div>
+
+{% endblock %}

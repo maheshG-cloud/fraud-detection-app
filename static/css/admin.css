@@ -1,0 +1,77 @@
+.dashboard-container table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.dashboard-container table th,
+.dashboard-container table td {
+    border: 1px solid #dee2e6;
+    padding: 12px 15px;
+    text-align: center;
+}
+
+.dashboard-container table th {
+    background-color: #0B3D91;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.dashboard-container table tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+.dashboard-container table tr:hover {
+    background-color: #e9ecef;
+}
+
+.dashboard-container button {
+    padding: 6px 12px;
+    border: none;
+    background-color: #28a745;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.dashboard-container button:hover {
+    background-color: #218838;
+}
+
+/* Admin logout button */
+.logout {
+    float: right;
+    margin-bottom: 15px;
+    text-decoration: none;
+    color: #fff;
+    background: #dc3545;
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.logout:hover {
+    background: #a71d2a;
+}
+
+
+
+/* Admin logout button */
+.logout {
+    float: right;
+    margin-bottom: 15px;
+    text-decoration: none;
+    color: #fff;
+    background: #dc3545;
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.logout:hover {
+    background: #a71d2a;
+}

@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<div class="container py-5">
+
+    <div class="text-center mb-4">
+        <h2 class="fw-bold text-primary">Transaction Analysis</h2>
+        <p class="text-muted">Enter transaction details to detect potential fraud</p>
+    </div>
+    
+    <div class="card shadow-lg border-0 p-4">
+        <form method="POST" action="/detect">
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Transaction ID</label>
+                    <input type="text" name="transaction_id" class="form-control" required>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Transaction Amount ($)</label>
+                    <input type="number" name="amount" class="form-control" required>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Transaction Type</label>
+                    <select name="transaction_type" class="form-select" required>
+                        <option value="">Select Type</option>
+                        <option>Online</option>
+                        <option>POS</option>
+                        <option>ATM Withdrawal</option>
+                        <option>Bank Transfer</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Date & Time</label>
+                    <input type="datetime-local" name="datetime" class="form-control" required>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Location (City)</label>
+                    <input type="text" name="location" class="form-control" required>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Area</label>
+                    <input type="text" name="area" class="form-control">
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Device Used</label>
+                    <select name="device" class="form-select">
+                        <option>Mobile</option>
+                        <option>Laptop</option>
+                        <option>ATM Machine</option>
+                        <option>POS Terminal</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Card Type</label>
+                    <select name="card_type" class="form-select">
+                        <option>Debit</option>
+                        <option>Credit</option>
+                        <option>Prepaid</option>
+                    </select>
+                </div>
+
+                <div class="col-md-12 mb-3">
+                    <label class="form-label">Merchant Category</label>
+                    <input type="text" name="merchant" class="form-control">
+                </div>
+
+            </div>
+
+            <div class="text-center mt-4">
+                
+                <button type="submit" class="btn btn-primary btn-lg px-5 shadow">
+                    Analyze Transaction
+                </button><br><br>
+                <a href="/" class="btn btn-primary"> Back</a>
+                <!-- Button to go to All Transactions -->
+<div class="mt-3">
+    <a href="{{ url_for('all_transactions') }}" class="btn btn-info">See All Transactions</a>
+</div>
+
+            </div>
+
+        </form>
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,45 @@
+body {
+    background-color: #F4F6F9;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.navbar {
+    background-color: #0B3D91 !important;
+}
+
+.hero-section {
+    background: linear-gradient(rgba(11,61,145,0.85), rgba(0,128,128,0.85)),
+                url('../images/hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 85vh;
+}
+
+.card {
+    border-radius: 12px;
+}
+
+.btn-light {
+    font-weight: 600;
+}
+
+
+
+/* Custom button for Detect page */
+.btn-info {
+    background-color: #0d78f2;
+    border-color: #175db8;
+    color: white;
+   
+    border-radius: 5px;
+    padding: 10px 60px;
+    text-decoration: none;
+    font-weight: 600;
+    
+}
+
+.btn-info:hover {
+    background-color: #154aa5;
+    border-color: #135295;
+    color: white;
+}

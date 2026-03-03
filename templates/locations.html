@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container py-5">
+
+    <h2 class="fw-bold text-primary mb-4">
+        Fraud Risk by Location
+    </h2>
+
+    <!-- Table of Location Stats -->
+    <div class="card shadow-lg border-0 mb-5">
+        <div class="card-body">
+            <table class="table table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>Location</th>
+                        <th>Total Transactions</th>
+                        <th>Fraud Cases</th>
+                        <th>Fraud %</th>
+                        <th>Risk Level</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for loc in location_stats %}
+                    <tr>
+                        <td>{{ loc[0] }}</td>
+                        <td>{{ loc[1] }}</td>
+                        <td>{{ loc[2] }}</td>
+                        <td>{{ loc[3] }}%</td>
+                        <td>
+                            {% if loc[3] > 50 %}
+                                <span class="badge bg-danger">High Risk</span>
+                            {% elif loc[3] > 20 %}
+                                <span class="badge bg-warning text-dark">Medium Risk</span>
+                            {% else %}
+                                <span class="badge bg-success">Low Risk</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Chart of Fraud Cases by Location -->
+    <div class="row g-4 mb-4">
+        <div class="col-md-12">
+            <div class="card shadow border-0 p-4">
+                <h6 class="fw-bold text-center mb-3">Fraud Cases by Location</h6>
+                <canvas id="locationsChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+const ctx = document.getElementById('locationsChart');
+const locationsChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: {{ locations|tojson }},
+        datasets: [{
+            label: 'Fraud Cases',
+            data: {{ counts|tojson }},
+            backgroundColor: '#dc3545'
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: { display: false },
+            title: { display: true, text: 'Fraud Cases by Location' }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                ticks: {
+                    precision:0
+                }
+            }
+        }
+    }
+});
+</script>
+
+
+
+
+<!-- Map Section -->
+<div class="row g-4 mb-5">
+    <div class="col-md-12">
+        <div class="card shadow border-0 p-4">
+            <h6 class="fw-bold text-center mb-3">Fraud Risk Map</h6>
+            <div id="map" style="height: 500px;"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Leaflet.js -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<div class="container py-4 d-flex justify-content-between">
+    <a href="/transactions" class="btn btn-primary"> Back</a>
+    <a href="/alerts" class="btn btn-primary">Next </a>
+</div>
+
+<script>
+var map = L.map('map').setView([22.5937, 78.9629], 5); // Centered on India
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+}).addTo(map);
+
+var mapData = {{ map_data|tojson }};
+
+mapData.forEach(function(loc) {
+    var color = loc.risk_percent > 50 ? 'red' : loc.risk_percent > 20 ? 'orange' : 'green';
+    L.circleMarker([loc.lat, loc.lon], {
+        color: color,
+        radius: 10,
+        fillOpacity: 0.7
+    }).addTo(map).bindPopup(
+        "<b>" + loc.location + "</b><br/>" +
+        "Fraud Cases: " + loc.fraud_cases + "<br/>" +
+        "Risk: " + loc.risk_percent + "%"
+    );
+});
+
+</script>
+{% endblock %}

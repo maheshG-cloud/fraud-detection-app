@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- Hero Section -->
+<section class="hero-section text-center text-white d-flex align-items-center">
+    <div class="container">
+        <h1 class="display-4 fw-bold">AI-Powered Transaction Fraud Detection</h1>
+        <p class="lead mt-3">
+            Secure financial transactions using advanced machine learning algorithms
+        </p>
+        <div class="mt-4">
+            <a href="/detect" class="btn btn-light btn-lg me-3 shadow">Detect Transaction</a>
+            <a href="/learn_more" class="btn btn-outline-light btn-lg">Learn More</a>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row text-center">
+
+            <div class="col-md-4">
+                <div class="card shadow-sm border-0 p-4">
+                    <h4 class="fw-bold">Real-Time Detection</h4>
+                    <p class="text-muted">
+                        Instantly analyze transactions using trained ML models.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card shadow-sm border-0 p-4">
+                    <h4 class="fw-bold">Detailed Analytics</h4>
+                    <p class="text-muted">
+                        Comprehensive fraud insights with reports & visualization.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card shadow-sm border-0 p-4">
+                    <h4 class="fw-bold">Location Monitoring</h4>
+                    <p class="text-muted">
+                        Detect fraud hotspots and suspicious geographic activity.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

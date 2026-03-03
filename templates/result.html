@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="card shadow-lg border-0 p-4">
+
+        <!-- Result Section -->
+        {% if result == "Fraud Detected" %}
+            <div class="alert alert-danger text-center">
+                <h2 class="fw-bold">⚠ FRAUD DETECTED</h2>
+                <p class="mb-0">This transaction is flagged as high risk.</p>
+            </div>
+        {% else %}
+            <div class="alert alert-success text-center">
+                <h2 class="fw-bold">✔ TRANSACTION SAFE</h2>
+                <p class="mb-0">No suspicious activity detected.</p>
+            </div>
+        {% endif %}
+
+        <div class="text-center mt-3">
+    <h4>Risk Score: 
+        {% if result == "Fraud Detected" %}
+            <span class="text-danger">{{ risk_score }}%</span>
+        {% else %}
+            <span class="text-success">{{ risk_score }}%</span>
+        {% endif %}
+    </h4>
+</div>
+
+        <!-- Transaction Details -->
+        <h4 class="mt-4 mb-3 text-primary">Transaction Details</h4>
+
+        <table class="table table-striped table-bordered">
+            <tbody>
+                {% for key, value in data.items() %}
+                <tr>
+                    <th class="bg-light">{{ key.replace('_',' ').title() }}</th>
+                    <td>{{ value }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="text-center mt-4">
+            <a href="/detect" class="btn btn-primary px-4">
+                Analyze Another Transaction
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

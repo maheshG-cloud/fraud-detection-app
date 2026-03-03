@@ -1,0 +1,56 @@
+<!-- admin_dashboard.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+</head>
+<body>
+    <div class="dashboard-container">
+        <div style="margin-bottom: 15px;">
+       <a href="{{ url_for('admin_logout') }}" class="logout">Logout</a>
+        <h2>Admin Dashboard - Fraud Alerts</h2>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Transaction ID</th>
+                <th>Amount</th>
+                <th>Type</th>
+                <th>Location</th>
+                <th>Device</th>
+                <th>Result</th>
+                <th>Action</th>
+            </tr>
+            {% for alert in alerts %}
+            <tr>
+                <td>{{ alert.id }}</td>
+                <td>{{ alert.transaction_id }}</td>
+                <td>{{ alert.amount }}</td>
+                <td>{{ alert.transaction_type }}</td>
+                <td>{{ alert.location }}</td>
+                <td>{{ alert.device }}</td>
+                <td>{{ alert.result }}</td>
+                <td>
+                    <button onclick="acknowledge({{ alert.id }})">Acknowledge</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <script>
+        function acknowledge(id) {
+            fetch(`/acknowledge/${id}`).then(response => {
+                if(response.ok) {
+                    location.reload();
+                }
+            });
+        }
+
+        // Optional: auto-refresh new alerts every 10 seconds
+        setInterval(() => {
+            location.reload();
+        }, 10000);
+    </script>
+</body>
+</html>

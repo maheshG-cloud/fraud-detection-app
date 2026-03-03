@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold text-primary">All Transactions</h2>
+
+        <div class="d-flex gap-2">
+            <a href="/" class="btn btn-primary"> Back</a>
+            <a href="/detect" class="btn btn-primary"> New Transaction</a>
+            <a href="/locations" class="btn btn-primary">Next </a>
+        </div>
+    </div>
+
+    <div class="card shadow-lg border-0">
+        <div class="card-body">
+
+            <table class="table table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>ID</th>
+                        <th>Transaction ID</th>
+                        <th>Amount</th>
+                        <th>Type</th>
+                        <th>Location</th>
+                        <th>Device</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for t in transactions %}
+                    <tr>
+                        <td>{{ t[0] }}</td>
+                        <td>{{ t[1] }}</td>
+                        <td>${{ t[2] }}</td>
+                        <td>{{ t[3] }}</td>
+                        <td>{{ t[4] }}</td>
+                        <td>{{ t[5] }}</td>
+
+                        <td>
+                            {% if t[6] == "Fraud Detected" %}
+                                <span class="badge bg-danger">Fraud</span>
+                            {% else %}
+                                <span class="badge bg-success">Safe</span>
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            <a href="/transaction/{{ t[0] }}" 
+                               class="btn btn-sm btn-outline-primary">
+                                View
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

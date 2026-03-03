@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container py-5">
+    <h2 class="fw-bold text-primary mb-4">
+        Fraud Detection Summary Report
+    </h2>
+
+    <div class="row g-4 mb-5">
+
+        <!-- Cards -->
+        <div class="col-md-3">
+            <div class="card shadow border-0 text-center p-4">
+                <h6 class="text-muted">Total Transactions</h6>
+                <h2 class="fw-bold">{{ total }}</h2>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow border-0 text-center p-4">
+                <h6 class="text-muted">Fraud Cases</h6>
+                <h2 class="fw-bold text-danger">{{ fraud }}</h2>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow border-0 text-center p-4">
+                <h6 class="text-muted">Safe Transactions</h6>
+                <h2 class="fw-bold text-success">{{ safe }}</h2>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow border-0 text-center p-4">
+                <h6 class="text-muted">Fraud Percentage</h6>
+                <h2 class="fw-bold text-warning">{{ fraud_percentage }}%</h2>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Charts -->
+    <div class="row g-4 mb-4">
+        <div class="col-md-6">
+            <div class="card shadow border-0 p-4">
+                <h6 class="fw-bold text-center mb-3">Transactions Overview</h6>
+                <canvas id="transactionsChart"></canvas>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card shadow border-0 p-4">
+                <h6 class="fw-bold text-center mb-3">Fraud vs Safe</h6>
+                <canvas id="fraudPieChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Download CSV -->
+    <div class="text-end mt-3">
+        <a href="/download_report" class="btn btn-success">
+            ⬇ Download Transaction Report (CSV)
+        </a>
+        <a href="/download_report_pdf" class="btn btn-primary ms-2">
+        📄 Download Full Report (PDF)
+    </a>
+    </div>
+
+        <!-- Back / Done Buttons -->
+    <style>
+        .report-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .report-nav a {
+            padding: 10px 25px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .report-nav a:hover {
+            background: #0056b3;
+        }
+    </style>
+
+    <div class="report-nav">
+        <a href="/alerts"> Back</a>
+        <a href="/">Done ✅</a>
+    </div>
+
+</div>
+
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+const transactionsChart = new Chart(document.getElementById('transactionsChart'), {
+    type: 'bar',
+    data: {
+        labels: ['Safe', 'Fraud'],
+        datasets: [{
+            label: 'Transactions Count',
+            data: [{{ safe }}, {{ fraud }}],
+            backgroundColor: ['#28a745', '#dc3545']
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: { display: false },
+            title: { display: true, text: 'Transaction Counts' }
+        }
+    }
+});
+
+const fraudPieChart = new Chart(document.getElementById('fraudPieChart'), {
+    type: 'pie',
+    data: {
+        labels: ['Safe', 'Fraud'],
+        datasets: [{
+            data: [{{ safe }}, {{ fraud }}],
+            backgroundColor: ['#28a745', '#dc3545']
+        }]
+    },
+    options: { responsive: true }
+});
+</script>
+
+{% endblock %}

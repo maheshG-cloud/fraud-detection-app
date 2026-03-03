@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container py-5">
+
+    <h2 class="fw-bold text-primary mb-4">Transaction Detailed Report</h2>
+
+    <div class="card shadow-lg border-0 p-4">
+
+        {% if transaction %}
+
+        <div class="row">
+
+            <div class="col-md-6">
+                <p><strong>Transaction ID:</strong> {{ transaction[1] }}</p>
+                <p><strong>Amount:</strong> ${{ transaction[2] }}</p>
+                <p><strong>Transaction Type:</strong> {{ transaction[3] }}</p>
+            </div>
+
+            <div class="col-md-6">
+                <p><strong>Location:</strong> {{ transaction[4] }}</p>
+                <p><strong>Device:</strong> {{ transaction[5] }}</p>
+
+                {% if transaction[6] == "Fraud Detected" %}
+                    <p><strong>Status:</strong> 
+                        <span class="badge bg-danger">Fraud Detected</span>
+                    </p>
+                {% else %}
+                    <p><strong>Status:</strong> 
+                        <span class="badge bg-success">Transaction Safe</span>
+                    </p>
+                {% endif %}
+            </div>
+
+        </div>
+
+        {% else %}
+            <p class="text-danger">Transaction not found.</p>
+        {% endif %}
+
+        <div class="text-center mt-4">
+            <a href="/transactions" class="btn btn-primary">
+                Back to All Transactions
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

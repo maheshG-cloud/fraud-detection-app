@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="learn-more-container">
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <h1>Discover FraudShield AI</h1>
+        <p>Protect your financial transactions with real-time fraud detection and insightful reports powered by AI.</p>
+        <br>
+        <br>
+        <br>
+      <h1>  Purpose </h1>
+<br>
+<p>Provide a deeper understanding of fraud detection and monitoring.<br>
+
+Showcase the features, workflow, and advantages of FraudShield AI.<br>
+
+Build trust and credibility with users.<br>
+
+Offer clear navigation back to the home page or forward to the product.</p>
+        <a href="/" class="btn-back"> BACK</a>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="feature-card">
+            <div class="icon">🛡️</div>
+            <h3>Real-Time Fraud Detection</h3>
+            <p>Analyze transactions instantly and detect fraudulent activities before they affect you.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="icon">📊</div>
+            <h3>Detailed Reports & Analytics</h3>
+            <p>Get comprehensive reports with charts, graphs, and insights for better decision making.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="icon">⚡</div>
+            <h3>Instant Alerts</h3>
+            <p>Receive notifications for suspicious transactions so you can act quickly.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="icon">🌍</div>
+            <h3>Global Coverage</h3>
+            <p>Monitor transactions across multiple locations with AI-powered location tracking.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="icon">🔒</div>
+            <h3>Secure & Reliable</h3>
+            <p>All data is protected with advanced security measures to ensure confidentiality.</p>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>Start monitoring your transactions today!</h2>
+        <a href="/detect" class="btn-start">Analyze Transactions Now 🚀</a>
+    </section>
+
+</div>
+
+<!-- Internal CSS -->
+<style>
+.learn-more-container {
+    font-family: 'Segoe UI', sans-serif;
+    padding: 50px 20px;
+    background: #f4f6f9;
+}
+
+/* Hero Section */
+.hero-section {
+    text-align: center;
+    background: linear-gradient(135deg, #13457b, #2b86a4);
+    color: white;
+    padding: 60px 20px;
+    border-radius: 15px;
+    margin-bottom: 50px;
+}
+.hero-section h1 {
+    font-size: 2.8rem;
+    margin-bottom: 5px;
+}
+.hero-section p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+.btn-back {
+    display: inline-block;
+    padding: 12px 25px;
+    background: rgba(255,255,255,0.85);
+    color: #007bff;
+    font-weight: bold;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+.btn-back:hover {
+    background: white;
+    color: #0056b3;
+}
+
+/* Features Section */
+.features-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+.feature-card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    width: 250px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}
+.feature-card .icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+.feature-card h3 {
+    color: #1f3e60;
+    margin-bottom: 10px;
+}
+.feature-card p {
+    color: #555;
+    font-size: 0.95rem;
+}
+
+/* CTA Section */
+.cta-section {
+    text-align: center;
+    padding: 40px 20px;
+    background: #184370;
+    color: white;
+    border-radius: 15px;
+}
+.cta-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+}
+.btn-start {
+    padding: 15px 35px;
+    background: #00bfff;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+.btn-start:hover {
+    background: #009acd;
+}
+</style>
+
+{% endblock %}

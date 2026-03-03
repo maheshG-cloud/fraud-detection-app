@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fraud Report PDF</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h2 { color: #0d6efd; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; page-break-inside: auto; }
+        table, th, td { border: 1px solid #333; }
+        th, td { padding: 8px; text-align: center; font-size: 12px; }
+        th { background-color: #0d6efd; color: white; }
+        tr:nth-child(even) { background-color: #f2f2f2; }
+        .card { border: 1px solid #ccc; padding: 10px; margin-bottom: 15px; display: inline-block; width: 23%; text-align: center; }
+        .chart { text-align: center; margin: 20px 0; }
+        .page-break { page-break-before: always; }
+    </style>
+</head>
+<body>
+    <h2>Fraud Detection Report</h2>
+
+    <!-- Summary Cards -->
+    <div class="card">
+        <h4>Total Transactions</h4>
+        <p>{{ total }}</p>
+    </div>
+    <div class="card">
+        <h4>Fraud Cases</h4>
+        <p>{{ fraud }}</p>
+    </div>
+    <div class="card">
+        <h4>Safe Transactions</h4>
+        <p>{{ safe }}</p>
+    </div>
+    <div class="card">
+        <h4>Fraud Percentage</h4>
+        <p>{{ fraud_percentage }}%</p>
+    </div>
+
+    <!-- Charts -->
+    <div class="chart">
+        <img src="{{ transactions_chart }}" width="600">
+    </div>
+    <div class="chart page-break">
+        <img src="{{ fraud_pie_chart }}" width="400">
+    </div>
+
+    <!-- Transactions Table -->
+    <h3>All Transactions</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Transaction ID</th>
+                <th>Amount</th>
+                <th>Type</th>
+                <th>Location</th>
+                <th>Device</th>
+                <th>Result</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for t in transactions %}
+            <tr>
+                <td>{{ t['id'] }}</td>
+                <td>{{ t['transaction_id'] }}</td>
+                <td>${{ t['amount'] }}</td>
+                <td>{{ t['transaction_type'] }}</td>
+                <td>{{ t['location'] }}</td>
+                <td>{{ t['device'] }}</td>
+                <td>{{ t['result'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
