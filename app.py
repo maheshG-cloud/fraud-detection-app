@@ -9,7 +9,7 @@ app = Flask(__name__)
 app.secret_key = "supersecretkey"  # only once, keep it at the top
 
 import pdfkit
-path_wkhtmltopdf = r"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"
+path_wkhtmltopdf = "/usr/bin/wkhtmltopdf"
 config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
 import os
 import matplotlib
@@ -445,4 +445,4 @@ def admin_logout():
     return redirect(url_for('admin_login'))
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000)
