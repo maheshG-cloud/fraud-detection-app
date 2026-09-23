@@ -64,7 +64,7 @@ const locationsChart = new Chart(ctx, {
     data: {
         labels: {{ locations|tojson }},
         datasets: [{
-            label: 'Fraud Cases',
+            label: 'Fraud Chart',
             data: {{ counts|tojson }},
             backgroundColor: '#dc3545'
         }]
@@ -73,7 +73,7 @@ const locationsChart = new Chart(ctx, {
         responsive: true,
         plugins: {
             legend: { display: false },
-            title: { display: true, text: 'Fraud Cases by Location' }
+            title: { display: true, text: 'Fraud Bar Chart by Location' }
         },
         scales: {
             y: {
